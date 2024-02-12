@@ -1,44 +1,46 @@
-1) Import all necessary utilities and set them up (ie: Scanner)
+1) Import all necessary utilities and set them up (ie: Scanner and Decimal Format)
 2) Output purpose: "Welcome to the Smart ATM, where we're smart with money so you don't have to be!"
 3) Ask user for their name: "Esteemed user, please enter your name: "
 4) Store the name in the variable name
-5) Ask the user what they would like to do: "What would you like to do, " + name + ": D - Deposit, W - Withdraw, C - Check Balance, or L - Leave"
-6) Store in choice
-7) While user did not enter "L" in choice 
-  a) If they chose "D"
-    I) Call the deposit method
-  b) Otherwise, if they chose "W"
-    I) Call the withdraw method
-  c) Otherwise, if they chose "C"
-    I) Call the check method 
-  d) Otherwise
-    I) Output that it was invalid: "That was not a valid option, please enter another: "
-  e) Ask the user what they would like to do: "What would you like to do next, " + name + ": D - Deposit, W - Withdraw, C - Check Balance, or L - Leave"
-  f) Store in choice
+5) Set initial_balance to 212.90 and balance equal to initial_balance
+6) Set the string choice to ""
+7) While user did not enter "L" in choice
+  a) Ask the user what they would like to do: "What would you like to do, " + name + ": D - Deposit, W - Withdraw, C - Check Balance, or L - Leave"
+  b) Store value in choice
+  c) If they chose "D"
+  // This is all in an error check
+    I) Ask how much they would like to deposit: "How much would you like to deposit?"
+    II) Store value in deposit
+  //
+    III) Add the deposit value to balance
+    IV) Output new balance: "Your new balance is: " + balance
+  d) Otherwise, if they chose "W"
+  // This is all in an error check
+    I) Ask how much they would like to deposit: "How much would you like to withdrawal?"
+    II) Store value in withdraw
+  //
+    III) If balance minus withdraw is less than zero
+        A) Output error message: "You cannot take that amount of money as you have insufficient funds!"
+        B) Set withdraw to 0
+    III) Subtract the withdrawal value to balance
+    IV) Output new balance: "Your new balance is: " + balance
+  e) Otherwise, if they chose "C"
+    I) Output balance: "Your current balance is: " + balance
+  f) Otherwise, if they chose "L"
+    I) Output thank you: "Thanks for using our services!"
+  g) Otherwise,
+    I) Output that it was invalid: "That was not a valid option, please try again"
 8) Ask user if they would like a receipt: "Would you like a receipt (P - Printed, E - Emailed) " 
 9) Store answer in receipt
-10) total equals the original balance minus the new balance
-11) If the balance is less than 0
-  a) Output: "You desposited " + new_balance-original_balance+ "!"
-12) Otherwise,
-  a) Output: "You withdrew " + original_balance-new_balance + "!"
+10) If the balance is less than initial_balance
+  a) Output withdrawal amount: "You withdrew " + fmt.format((initial_balance - balance)) + " dollars!"
+11) Otherwise if the balance is greater than initial_balance
+  a) Output deposit amount: "You deposited " + fmt.format((balance - initial_balance)) + " dollars!"
+12) Otherwise
+  a) Output: "You neither added nor took any money!"
 13) If receipt equals "P"
-  a) Output: "Please take the printed receipt! Have a great day!" 
-14) Otherwise,
-  a) Output: "Don't forget to check your email! Have a great day!"
-
-Method: deposit
-Purpose: To allow the user to deposit a sum of money into their account
-Parameters: the original balance
-
-Method: withdraw
-Purpose: To allow the user to take money from their account 
-Parameters: the original balance
-
-Method: check
-Purpose: To allow the user to check their balance
-Parameters: the balance of their account
-
-Method: error_number
-Purpose: To error check the number inputted by the user
-Parameters: the number inputted by the user 
+  a) Output print statement: "Please take the printed receipt! Have a great day!"
+14) Otherwise if receipt equals "E""
+  a) Output email statement: "Please look at the emailed receipt! Have a great day!"
+15) Otherwise
+  a) Output: "No receipt, no problem! Have a great day!"
